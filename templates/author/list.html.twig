@@ -51,7 +51,7 @@
             <td>{{ author['username']|upper }}</td>
             <td>{{ author['email'] }}</td>
             <td>{{ author['nb_books'] }}</td>
-            <td><a href="{{ path('app_author', {'name': author['username']}) }}">Détails</a></td>
+            <td><a href="{{ path('author_details', {id: author.id}) }}">Détails</a></td>
 
         </tr>
         {% set totalBooks = totalBooks + author['nb_books'] %}

@@ -15,6 +15,7 @@ class AuthorController extends AbstractController
         ['name' => $name]);
     }
     #[Route('/list', name: 'app_list2')]
+    // variable locale le tableau dans le function list 
 public function list () {
     $authors= array(
         array('id' => 1, 'picture' => '/images/Victor-Hugo.jpg','username' => 'Victor Hugo', 'email' =>
@@ -25,5 +26,18 @@ public function list () {
         'taha.hussein@gmail.com', 'nb_books' => 300),
         );
         return $this->render('author/list.html.twig',['authors'=> $authors]);  
+}
+#[Route('/author_details/{id}', name:'author_details')]
+public function author_details ($id)
+{
+    $authors= array(
+        array('id' => 1, 'picture' => '/images/Victor-Hugo.jpg','username' => 'Victor Hugo', 'email' =>
+        'victor.hugo@gmail.com ', 'nb_books' => 100),
+        array('id' => 2, 'picture' => '/images/william-shakespeare.jpg','username' => ' William Shakespeare', 'email' =>
+        ' william.shakespeare@gmail.com', 'nb_books' => 200 ),
+        array('id' => 3, 'picture' => '/images/Taha_Hussein.jpg','username' => 'Taha Hussein', 'email' =>
+        'taha.hussein@gmail.com', 'nb_books' => 300),
+        );
+    return $this->render('author/showAuthor.html.twig',['authors'=> $authors,'id' => $id]);
 }
 }
