@@ -1,0 +1,25 @@
+<h1>Détails du livre</h1>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Titre</th>
+            <td>{{ book.title }}</td>
+        </tr>
+        <tr>
+            <th>Date de publication</th>
+            <td>{{ book.publicationDate|date('Y-m-d') }}</td>
+        </tr>
+        <tr>
+            <th>Publié</th>
+            <td>{{ book.published ? 'Oui' : 'Non' }}</td>
+        </tr>
+        <tr>
+            <th>Catégorie</th>
+            <td>{{ book.category }}</td>
+        </tr>
+        <tr>
+            <th>Auteur</th>
+            <td>{{ book.author.username }}</td>
+        </tr>
+    </tbody>
+</table>

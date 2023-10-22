@@ -1,0 +1,34 @@
+{# dump(books) #}
+<h1>Livres publiés</h1>
+<table class="table" style="border: 1px solid #000;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #000;">Titre</th>
+            <th style="border: 1px solid #000;">Date de publication</th>
+            <th style="border: 1px solid #000;">Publié</th>
+            <th style="border: 1px solid #000;">Catégorie</th>
+            <th style="border: 1px solid #000;">Auteur</th>
+            <th style="border: 1px solid #000;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td style="border: 1px solid #000;">{{ book.title }}</td>
+            <td style="border: 1px solid #000;">{{ book.publicationDate|date('Y-m-d') }}</td>
+            <td style="border: 1px solid #000;">{{ book.published ? 'Oui' : 'Non' }}</td>
+            <td style="border: 1px solid #000;">{{ book.category }}</td>
+            <td style="border: 1px solid #000;">{{ book.author.username }}</td>
+            <td style="border: 1px solid #000;">
+                <a href="{{ path('edit_book', {'id': book.id}) }}" class="btn btn-primary">edit</a>
+                <a href="{{ path('delete_book', {'id': book.id}) }}" class="btn btn-danger">delete</a>
+                <a href="{{ path('show_book', {'id': book.id}) }}" class="btn btn-info">show</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
