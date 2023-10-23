@@ -101,5 +101,12 @@ public function author_details ($id)
     }
 return $this->renderForm("author/update.html.twig",["form"=>$form]);
 
+
    }
+   #[Route('/author/trieQB',name:'trieQB_author')]
+public function trieQB_author (AuthorRepository $authorrepo) {
+ $authors = $authorrepo->trieQB();
+ return $this->render('author/read.hmtl.twig',['authors'=> $authors]);
+
    }
+}

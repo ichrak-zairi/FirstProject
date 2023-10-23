@@ -45,4 +45,23 @@ class BookRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+public function showAllBooksByAuthor($title)
+        {
+            return $this->createQueryBuilder('b')
+                ->where('b.title LIKE :title')
+                ->setParameter('title', '%'.$title.'%')
+                ->getQuery()
+                ->getResult()
+            ;
+        }
+public function trieDQ (){
+   $em=$this -> getEntityManager () ;
+   $query =$em -> createQuery('SELECT b FROM App\Entity\Book b ORDER BY b.title DESC' );
+   return $query -> getResult () ;
+}
+function NbBookCategory(){
+    $em=$this->getEntityManager();
+    return $em->createQuery('select count(b) from App\Entity\Book b WHERE b.category=:category')
+    ->setParameter('category','Science Fiction')->getSingleScalarResult();
+}
 }

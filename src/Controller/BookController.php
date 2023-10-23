@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Form\BookType;
 use App\Form\AuthorType;
+use App\Form\SearchType; 
 
 use App\Repository\BookRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,6 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class BookController extends AbstractController
 {
@@ -73,16 +75,25 @@ public function delete(ManagerRegistry $doctrine, BookRepository $bookrep, $id)
 
     return $this->redirectToRoute("read_book");
 }
-#[Route('/book/show/{id}', name: 'show_book')]
-public function showBook(int $id, BookRepository $bookRepository): Response
-{
-    $book = $bookRepository->find($id);
-
-    if (!$book) {
-        throw $this->createNotFoundException('Le livre demandé n\'existe pas.');
+#[Route('/book/list/search', name: 'app_book_search')]
+public function searchBook(Request $request,BookRepository $bookRepository): Response
+    {   $book=new Book();
+        $form=$this->createForm(SearchType::class,$book);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            return $this->render('book/listSearch.html.twig', [
+                'books' => $bookRepository->showAllBooksByAuthor($book->getTitle()),
+                'f'=>$form->createView()
+            ]);
+        }
+        return $this->render('book/listSearch.html.twig', [
+            'books' => $bookRepository->findAll(),
+            'f'=>$form->createView()
+        ]);
     }
-
-    return $this->render('book/show.html.twig', ['book' => $book]);
+#[Route('/book/trieDQ', name: 'app_book_trieDQ')]  
+public function trieDQ (BookRepository $bookRepository){
+    return $this->render('book/read.html.twig', [
+        'books' => $bookRepository->trieDQ(),]);
 }
-
 }

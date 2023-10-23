@@ -22,13 +22,13 @@
             <td style="border: 1px solid #000;">
                 <a href="{{ path('edit_book', {'id': book.id}) }}" class="btn btn-primary">edit</a>
                 <a href="{{ path('delete_book', {'id': book.id}) }}" class="btn btn-danger">delete</a>
-                <a href="{{ path('show_book', {'id': book.id}) }}" class="btn btn-info">show</a>
+               {# <a href="{{ path('show_book', {'id': book.id}) }}" class="btn btn-info">show</a>#}
 
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-
-
+{#<a href="{{ path('trieQB_book') }}">trieQB</a>#}
+<a href="{{ path('app_book_trieDQ') }}">trieQB</a>
 
